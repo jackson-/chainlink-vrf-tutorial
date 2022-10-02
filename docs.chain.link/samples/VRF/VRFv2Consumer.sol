@@ -13,9 +13,13 @@ contract RandomNumberConsumer is VRFConsumerBase {
 
     }
 
-    function getRandomNumber(uint userProvidedSeed) {
-        
+    function getRandomNumber() public returns (bytes32 requestId) {
+        return requestRandomness(keyHash, fee);
     }
+
+    function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
+        randomResult = randomness;
+    } 
 
 
 }
